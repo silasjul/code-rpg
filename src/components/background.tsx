@@ -9,18 +9,18 @@ export default function Background() {
     useEffect(() => {
         if (typeof window === "undefined") return; // Ensure client-side execution
 
-        let images = layers.current
+        const images = layers.current
             ? ([...layers.current.children] as HTMLElement[])
             : [];
         let xVal = 0,
             yVal = 0;
 
-        let handleMouseMove = (e: MouseEvent) => {
+        const handleMouseMove = (e: MouseEvent) => {
             xVal = e.clientX - window.innerWidth / 2;
             yVal = e.clientY - window.innerHeight / 2;
 
             images.forEach((el) => {
-                let speed = Number(el.dataset.speed),
+                const speed = Number(el.dataset.speed),
                     speedx = speed * 0.5,
                     speedy = speed * 0.5;
 
