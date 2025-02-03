@@ -54,7 +54,7 @@ export default function Background() {
                 priority
             />
             <Image
-                className="absolute min-w-[2144] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+                className="absolute min-w-[2144px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
                 data-speed="0.22"
                 src="/bg/4ext.png"
                 alt="4"
