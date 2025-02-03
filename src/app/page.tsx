@@ -25,7 +25,7 @@ export default function Home() {
                         pixelFont.className
                     }
                 >
-                    Suck -> penis
+                    Suck - penis
                 </button>
             </div>
             <Background />
