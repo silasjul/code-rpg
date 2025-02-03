@@ -1,4 +1,4 @@
-import { Jacquard_12, Jersey_10 } from "next/font/google";
+import { Jacquard_12 } from "next/font/google";
 import Background from "@/components/background";
 import Image from "next/image";
 
