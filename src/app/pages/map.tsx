@@ -1,7 +1,5 @@
 import { Carousel } from "@/components/ui/carousel";
-import { button } from "motion/react-client";
-import { title } from "process";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 export default function Map() {
     const slideData = [
