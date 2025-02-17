@@ -7,27 +7,27 @@ export default function Map() {
     const slideData = [
         {
             title: "Mystical Forest",
-            button: "Explore Component",
+            button: "Explore",
             src: "./locations/forest.png",
         },
         {
             title: "Dwarven Caves",
-            button: "Explore Component",
+            button: "Explore",
             src: "./locations/cave.png",
         },
         {
             title: "Deserted Canyon",
-            button: "Explore desert",
+            button: "Explore",
             src: "./locations/desert.png",
         },
         {
             title: "Frostlands",
-            button: "Explore Component",
+            button: "Explore",
             src: "./locations/ice.png",
         },
         {
             title: "Inferno",
-            button: "Explore Component",
+            button: "Explore",
             src: "./locations/lava.png",
         },
     ];

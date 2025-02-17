@@ -12,6 +12,21 @@ interface Props {
     transition: (page: string) => void;
 }
 
+const TitleButton = ({
+    children,
+    onClick,
+}: {
+    children: React.ReactNode;
+    onClick: () => void;
+}) => (
+    <button
+        className={`text-8xl hover:text-white hover:scale-110 duration-200 ${pixelFont.className}`}
+        onClick={onClick}
+    >
+        {children}
+    </button>
+);
+
 export default function MainMenu({ transition }: Props) {
     return (
         <>
@@ -24,15 +39,11 @@ export default function MainMenu({ transition }: Props) {
                     height={338}
                     unoptimized
                 />
-                <button
-                    onClick={() => transition("map")}
-                    className={
-                        "text-8xl hover:scale-110 duration-200 " +
-                        pixelFont.className
-                    }
-                >
-                    {">"} Begin
-                </button>
+                <div className="flex flex-col gap-5">
+                    <TitleButton onClick={() => transition("map")}>
+                        Adventure
+                    </TitleButton>
+                </div>
             </div>
             <Background />
         </>
