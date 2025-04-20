@@ -20,7 +20,7 @@ const TitleButton = ({
     onClick: () => void;
 }) => (
     <button
-        className={`text-8xl hover:text-white hover:scale-110 duration-200 ${pixelFont.className}`}
+        className={`text-8xl text-black hover:text-white hover:scale-110 duration-200 ${pixelFont.className}`}
         onClick={onClick}
     >
         {children}

@@ -14,8 +14,8 @@ export default function Home() {
 
     const pages = {
         menu: <MainMenu transition={transition} />,
-        map: <Map />,
-        transition: <Transition transition={transition} />,
+        map: <Map transition={transition} />,
+        transition: <Transition />,
     };
 
     return pages[state as keyof typeof pages];
