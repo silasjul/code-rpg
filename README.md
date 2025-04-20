@@ -7,7 +7,7 @@
 ╚██████╗╚██████╔╝██████╔╝███████╗██║  ██║██║     ╚██████╔╝
  ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝╚═╝      ╚═════╝ 
 ---------------------------------------------------------
-Automated Tinder Bot for swiping and messaging
+An adventure rpg game for programmers to learn and practice fun coding problems!
 </pre>
 
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/)
