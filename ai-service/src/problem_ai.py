@@ -8,6 +8,10 @@ class CodingProblem(BaseModel):
   hints: list[str]
   starter_code: str
 
+class ProblemEvaluation(BaseModel):
+    feedback: str
+    score: int
+
 class ModelType(Enum):
     SMART = "gemini-2.5-pro-preview-03-25"  # 16 sec
     FAST = "gemini-2.5-flash-preview-04-17" # 8 sec
@@ -17,7 +21,7 @@ class ProblemAI:
     def __init__(self):
         self.client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
         self.model = ModelType.FAST.value
-        self.chat = self.client.chats.create(model=self.model)
+        self.chat = self.client.chats.create(model=self.model) # Add a chat so that the user can get feedback on their code and have llm look at chat history to give better feedback
 
     def generate_problem(self) -> CodingProblem:
         prompt = """
@@ -28,14 +32,38 @@ class ProblemAI:
             3. Starter code that is the starting point the user see in an editor.
         """
         response = self.client.models.generate_content(
-        model=self.model, 
-        contents=prompt, 
+        model=ModelType.SMART.value, 
+        contents=prompt,
         config={
             'response_mime_type': 'application/json',
             'response_schema': CodingProblem,
         })
 
-        return response.parsed # parses the response with the schema to insure reliable output
+        return response.parsed
+    
+    def evaluate_answer(self, description: str, answer: str) -> int:
+        prompt = f"""
+            Coding problem description:
+            {description}
+
+            Answer:
+            {answer}
+
+            You are the Universe guiding wizards in a magical world where mages battle monsters by solving coding problems.
+
+            Based on the context above, evaluate the answer and provide:
+            - Feedback: Highlight strengths, areas for improvement, and encouragement.
+            - Score: A value from 0-100.
+        """
+        response = self.client.models.generate_content(
+        model=ModelType.SMART.value, 
+        contents=prompt, 
+        config={
+            'response_mime_type': 'application/json',
+            'response_schema': ProblemEvaluation,
+        })
+
+        return response.parsed
     
     def reset_chat(self):
         self.chat = self.client.chats.create(model=self.model)
@@ -43,5 +71,40 @@ class ProblemAI:
 
 if __name__ == "__main__":
     ai = ProblemAI()
-    response = ai.generate_problem()
-    print(response.hints)
+    #proplem = ai.generate_problem()
+
+    description_example = """
+            '''Write a function that takes a list of strings and groups the anagrams together.
+
+            Two words are anagrams if they contain the same characters in the same frequency, but possibly in a different order. 
+            For example, "tea", "ate", and "eat" are all anagrams of each other.'''
+
+            input_list = ["eat", "tea", "tan", "ate", "nat", "bat"]
+
+            def group_anagrams(words):
+                pass
+
+            result = group_anagrams(input_list)
+            print(result)  # Expected output: [['eat', 'tea', 'ate'], ['tan', 'nat'], ['bat']] (order may vary)
+        """
+    answer_example = """
+            from collections import defaultdict
+
+            input_list = ["eat", "tea", "tan", "ate", "nat", "bat"]
+
+            def group_anagrams(words):
+                result = defaultdict(list)
+                for word in words:
+                    result[sort_word(word)].append(word)
+                return list(result.values())
+
+            def sort_word(word):
+                return "".join(sorted(word))
+
+            result = group_anagrams(input_list)
+            print(result)  # Expected output: [['eat', 'tea', 'ate'], ['tan', 'nat'], ['bat']] (order may vary)
+        """
+    
+    response = ai.evaluate_answer(description_example, answer_example)
+    print(response)
+    
