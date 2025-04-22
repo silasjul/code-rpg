@@ -1,5 +1,5 @@
 import React from "react";
-import { Scene } from "@/app/hooks/useGameManager";
+import { Scene } from "@/hooks/useGameManager";
 
 interface GameOverProps {
     onTransition: (nextScene: Scene) => void;

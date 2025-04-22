@@ -1,6 +1,6 @@
 import React from "react";
 import { Logo, Background, MenuButton } from "@/components/menu";
-import { Scene } from "@/app/hooks/useGameManager";
+import { Scene } from "@/hooks/useGameManager";
 
 interface MainMenuProps {
     onTransition: (nextScene: Scene) => void;
@@ -19,7 +19,9 @@ export default function MainMenu({ onTransition }: MainMenuProps) {
                     <Logo className="w-[40%]" />
                 </div>
                 <div className="mt-10 flex flex-col gap-10 justify-center items-center">
-                    <MenuButton onClick={handleStartAdventure}>Start Adventure</MenuButton>
+                    <MenuButton onClick={handleStartAdventure}>
+                        Start Adventure
+                    </MenuButton>
                     <MenuButton>Character</MenuButton>
                 </div>
             </div>
