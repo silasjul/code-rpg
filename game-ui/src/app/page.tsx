@@ -1,27 +1,21 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
-import Background from "@/components/background";
-import TitleButton from "@/components/pixel_btn";
+import { Logo, Background, MenuButton } from "@/components/frontpage";
 
 export default function Home() {
     return (
         <>
-            <div className="absolute w-screen h-screen flex justify-center items-center z-10 ">
-                <Image
-                    className="absolute h-[30%] w-auto top-[1%] pointer-events-none"
-                    src="/bg/title.png"
-                    alt="title"
-                    width={964}
-                    height={338}
-                    unoptimized
-                />
-                <div className="flex flex-col gap-5">
-                    <TitleButton>Adventure</TitleButton>
+            <Background />
+            <div className="absolute w-screen h-screen">
+                <div className="flex justify-center items-center">
+                    <Logo className="w-[40%]" />
+                </div>
+                <div className="mt-10 flex flex-col gap-10 justify-center items-center">
+                    <MenuButton>Start Adventure</MenuButton>
+                    <MenuButton>Character</MenuButton>
                 </div>
             </div>
-            <Background />
         </>
     );
 }

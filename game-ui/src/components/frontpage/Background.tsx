@@ -6,9 +6,8 @@ import React, { useEffect, useRef } from "react";
 export default function Background() {
     const layers = useRef<HTMLDivElement>(null);
 
+    // Handle the mouse movement and apply the parallax effect to the images
     useEffect(() => {
-        if (typeof window === "undefined") return; // Ensure client-side execution
-
         const images = layers.current
             ? ([...layers.current.children] as HTMLElement[])
             : [];
@@ -32,7 +31,6 @@ export default function Background() {
         };
 
         window.addEventListener("mousemove", handleMouseMove);
-
         return () => window.removeEventListener("mousemove", handleMouseMove);
     }, []);
 
@@ -40,7 +38,7 @@ export default function Background() {
         <div
             ref={layers}
             className={
-                "w-screen h-screen overflow-hidden pointer-events-none relative *:duration-[450ms] *:ease-[cubic-bezier(.29,.54,.42,.99)]"
+                "w-screen h-screen overflow-hidden pointer-events-none absolute *:duration-[450ms] *:ease-[cubic-bezier(.29,.54,.42,.99)]"
             }
         >
             <Image
