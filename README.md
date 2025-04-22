@@ -11,7 +11,6 @@ An adventure rpg game for programmers to learn and practice fun coding problems!
 </pre>
 
 [![Python](https://img.shields.io/badge/Python-3.13%2B-blue)](https://www.python.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 </div>
 
