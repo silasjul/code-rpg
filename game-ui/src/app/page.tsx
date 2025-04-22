@@ -1,21 +1,25 @@
 "use client";
 
 import React from "react";
-import { Logo, Background, MenuButton } from "@/components/frontpage";
+import { useGameManager } from "@/app/hooks/useGameManager";
+import {
+    MainMenu,
+    BattleScreen,
+    Cutscene,
+    GameOver,
+    PickupScreen,
+} from "@/app/scenes";
 
-export default function Home() {
-    return (
-        <>
-            <Background />
-            <div className="absolute w-screen h-screen">
-                <div className="flex justify-center items-center">
-                    <Logo className="w-[40%]" />
-                </div>
-                <div className="mt-10 flex flex-col gap-10 justify-center items-center">
-                    <MenuButton>Start Adventure</MenuButton>
-                    <MenuButton>Character</MenuButton>
-                </div>
-            </div>
-        </>
-    );
+export default function Game() {
+    const { scene, transition } = useGameManager();
+
+    const sceneMap = {
+        menu: <MainMenu onTransition={transition} />,
+        cutscene: <Cutscene onTransition={transition} />,
+        battle: <BattleScreen onTransition={transition} />,
+        pickup: <PickupScreen onTransition={transition} />,
+        gameover: <GameOver onTransition={transition} />,
+    };
+
+    return <div className="w-full h-full">{sceneMap[scene]}</div>;
 }
