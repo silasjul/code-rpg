@@ -6,6 +6,7 @@
     --background: #ffffff;
     --foreground: #171717;
     --text-outline: rgba(255, 255, 255, 0.5);
+    --text-outline-size: 1px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,9 +23,9 @@ body {
 }
 
 .text-outline {
-    text-shadow:
-      -1px -1px 0 var(--text-outline),
-       1px -1px 0 var(--text-outline),
-      -1px  1px 0 var(--text-outline),
-       1px  1px 0 var(--text-outline);
+    text-shadow: var(--text-outline-size) var(--text-outline-size) 0
+            var(--text-outline),
+        var(--text-outline-size) var(--text-outline-size) 0 var(--text-outline),
+        var(--text-outline-size) var(--text-outline-size) 0 var(--text-outline),
+        var(--text-outline-size) 1px 0 var(--text-outline);
 }

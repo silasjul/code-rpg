@@ -15,7 +15,7 @@ export const useGameManager = () => {
     const [playerHP, setPlayerHP] = useState(100);
     const [inventory, setInventory] = useState<string[]>([]);
 
-    const transition = (nextScene: Scene, delay = 5000) => {
+    const transition = (nextScene: Scene, delay = 1000) => {
         setIsTransitioning(true);
         setScene("cutscene");
 
