@@ -22,7 +22,25 @@ class ProblemAI:
         self.client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
         self.model = ModelType.FAST.value
         self.chat = self.client.chats.create(model=self.model) # Add a chat so that the user can get feedback on their code and have llm look at chat history to give better feedback
+        self.bot_description = "You are the Universe guiding wizards in a magical world where mages battle monsters by solving coding problems."
 
+    def ask_question(self, problem: str, code: str, question: str) -> str:
+        response = self.chat.send_message(f"""
+            Coding problem:
+            {problem}
+
+            Code Written:
+            {code}
+
+            {self.bot_description}
+
+            A wizard has used a hint trying to solve a problem. Answer their question in a way that helps them understand the problem better without giving them the answer or using code examples. Shorten answer as much as possible:
+            {question}
+
+            {self.bot_description}
+        """)
+        return response.text
+    
     def generate_problem(self) -> CodingProblem:
         prompt = """
             Generate a new fun python coding problem in the style of leetcode. Your output should have:
@@ -49,7 +67,7 @@ class ProblemAI:
             Answer:
             {answer}
 
-            You are the Universe guiding wizards in a magical world where mages battle monsters by solving coding problems.
+            {self.bot_description}
 
             Based on the context above, evaluate the answer and provide:
             - Feedback: Highlight strengths, areas for improvement, and encouragement.
@@ -105,6 +123,6 @@ if __name__ == "__main__":
             print(result)  # Expected output: [['eat', 'tea', 'ate'], ['tan', 'nat'], ['bat']] (order may vary)
         """
     
-    response = ai.evaluate_answer(description_example, answer_example)
+    response = ai.ask_question(problem=description_example, code=answer_example, question="Im not sure how to group the anagrams. How can i do this?")
     print(response)
     
