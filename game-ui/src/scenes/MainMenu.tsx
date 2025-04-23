@@ -20,7 +20,7 @@ export default function MainMenu({ onTransition }: MainMenuProps) {
     // Reveal animation
     useGSAP(() => {
         gsap.timeline({
-            delay: 1.5,
+            delay: 1,
             defaults: { ease: "power2", duration: 1.3 },
         })
             .from(

@@ -54,7 +54,7 @@ export default function Background() {
             : [];
 
         let duration = 1;
-        let delay = 0.5;
+        let delay = 0.2;
 
         for (let image of images) {
             if (image.dataset.animate === "false") continue;
@@ -155,9 +155,8 @@ export default function Background() {
                 unoptimized
             />
             <Image
-                className={`${parallaxStyle} top-1/2 min-w-[105%] mix-blend-screen opacity-90`}
+                className={`${parallaxStyle} top-[55%] min-w-[105%] mix-blend-screen opacity-90`}
                 data-speed="0.015"
-                data-animate="false"
                 src="/bg/sun.png"
                 alt="sun"
                 width={1920}
