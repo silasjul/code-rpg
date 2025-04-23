@@ -20,6 +20,6 @@ The idea of CodeRPG is an interactive role-playing game where players solve codi
 
 ## Features
 
--   You begin each adventure starting and complete coding problems to battle enemies, unlock items/skills
+-   You begin each adventure with 0 pickups and complete coding problems to battle enemies, unlock items/skills untill they become so hard that you eventually fail (RogueLite)
 -   Explore a rich storyline with branching paths.
 -   Customize your character and improve their skills.
