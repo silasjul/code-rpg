@@ -2,22 +2,14 @@ import React, { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { Logo, Background, MenuButton } from "@/components/menu";
-import { Scene } from "@/app/page";
+import { useGameManager } from "@/hooks/useGameManager";
 
-interface MainMenuProps {
-    onTransition: (nextScene: Scene) => void;
-}
-
-export default function MainMenu({ onTransition }: MainMenuProps) {
-    const handleStartAdventure = () => {
-        onTransition("menu");
-    };
-
+export default function MainMenu() {
+    // GSAP animation
     const container = useRef(null);
     const logoRef = useRef(null);
     const buttonsContainerRef = useRef(null);
 
-    // Reveal animation
     useGSAP(() => {
         gsap.timeline({
             delay: 1,
@@ -42,6 +34,12 @@ export default function MainMenu({ onTransition }: MainMenuProps) {
                 0
             );
     }, [container]);
+
+    // Click handlers
+    const { setScene } = useGameManager();
+    const handleStartAdventure = () => {
+        setScene("loadingproblem");
+    };
 
     return (
         <>

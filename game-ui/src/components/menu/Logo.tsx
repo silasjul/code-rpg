@@ -5,7 +5,7 @@ export default function Logo({ className }: { className?: string }) {
     return (
         <Image
             className={`pointer-events-none ${className}`}
-            src="/bg/title.png"
+            src="/main-bg/title.png"
             alt="title"
             width={964}
             height={338}

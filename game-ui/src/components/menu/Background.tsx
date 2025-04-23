@@ -85,42 +85,46 @@ export default function Background() {
                 "absolute w-screen h-screen overflow-hidden pointer-events-none *:duration-[450ms] *:ease-[cubic-bezier(.29,.54,.42,.99)]"
             }
         >
+            {/* Layer 1 / Background */}
             <Image
                 className={`${parallaxStyle} top-[54%] min-w-[2224px]`} // images that are bigger than the screen gets automatically cropped :/
                 data-speed="0.3"
                 data-top="46%"
-                src="/bg/5ext.png"
+                src="/main-bg/background.png"
                 alt="5"
                 width={2224}
                 height={1168}
                 unoptimized
                 priority
             />
+            {/* Layer 2 */}
             <Image
                 className={`${parallaxStyle} ${layerOffset} min-w-[2144px]`}
                 data-speed="0.22"
-                src="/bg/4ext.png"
+                src="/main-bg/mountains.png"
                 alt="4"
                 width={2144}
                 height={1080}
                 unoptimized
             />
+            {/* Layer 3 */}
             <Image
                 className={`${parallaxStyle} ${layerOffset} min-w-[1920px]`}
                 data-speed="0.15"
-                src="/bg/3.png"
+                src="/main-bg/river.png"
                 alt="3"
                 width={1920}
                 height={1080}
                 unoptimized
             />
+            {/* Layer 4 */}
             <div
                 className={`${parallaxStyle} ${layerOffset} min-w-[2032px]`}
                 data-speed="0.1"
             >
                 <Image
                     className={`${parallaxStyle} ${layerOffset} min-w-[2032px]`}
-                    src="/bg/2ext.png"
+                    src="/main-bg/grass.png"
                     alt="2"
                     width={2032}
                     height={1080}
@@ -128,36 +132,39 @@ export default function Background() {
                 />
                 <Image
                     className={`${parallaxStyle} ${layerOffset} min-w-[1920px] z-10`}
-                    src="/bg/wizard.png"
+                    src="/main-bg/wizard.png"
                     alt="wizard"
                     width={1920}
                     height={1080}
                     unoptimized
                 />
             </div>
+            {/* Sun rays */}
             <Image
                 className={`${parallaxStyle} min-w-[3302px] mix-blend-soft-light z-0`}
                 data-speed="0.015"
                 data-animate="false"
-                src="/bg/rays.png"
+                src="/main-bg/rays.png"
                 alt="rays"
                 width={3302}
                 height={3303}
                 unoptimized
             />
+            {/* Layer 5 / Foreground */}
             <Image
                 className={`${parallaxStyle} ${layerOffset} min-w-[1952px]`}
                 data-speed="0.03"
-                src="/bg/1ext.png"
+                src="/main-bg/trees.png"
                 alt="1"
                 width={1952}
                 height={1096}
                 unoptimized
             />
+            {/* Sun lens*/}
             <Image
                 className={`${parallaxStyle} top-[55%] min-w-[105%] mix-blend-screen opacity-90`}
                 data-speed="0.015"
-                src="/bg/sun.png"
+                src="/main-bg/sun.png"
                 alt="sun"
                 width={1920}
                 height={1080}

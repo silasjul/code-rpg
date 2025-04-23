@@ -1,27 +1,17 @@
 "use client";
 
 import React from "react";
-import { useGameManager } from "@/hooks/useGameManager";
-import {
-    MainMenu,
-    BattleScreen,
-    Cutscene,
-    GameOver,
-    PickupScreen,
-} from "@/scenes";
+import { GameManagerProvider, useGameManager } from "@/hooks/useGameManager";
 
-export type Scene = "menu" | "cutscene" | "battle" | "pickup" | "gameover";
-
-export default function Game() {
-    const { scene, transition } = useGameManager();
-
-    const sceneMap = {
-        menu: <MainMenu onTransition={transition} />,
-        cutscene: <Cutscene onTransition={transition} />,
-        battle: <BattleScreen onTransition={transition} />,
-        pickup: <PickupScreen onTransition={transition} />,
-        gameover: <GameOver onTransition={transition} />,
-    };
-
+function SceneContent() {
+    const { sceneMap, scene } = useGameManager();
     return sceneMap[scene];
+}
+
+export default function SceneRenderer() {
+    return (
+        <GameManagerProvider>
+            <SceneContent />
+        </GameManagerProvider>
+    );
 }

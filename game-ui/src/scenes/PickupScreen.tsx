@@ -1,10 +1,5 @@
 import React from "react";
-import { Scene } from "@/app/page";
 
-interface PickupScreenProps {
-    onTransition: (nextScene: Scene) => void;
-}
-
-export default function PickupScreen({ onTransition }: PickupScreenProps) {
+export default function PickupScreen() {
     return <div>PickupScreen</div>;
 }
