@@ -1,11 +1,5 @@
 import { useState } from "react";
-
-export type Scene =
-    | "menu"
-    | "cutscene"
-    | "battle"
-    | "pickup"
-    | "gameover";
+import { Scene } from "@/app/page";
 
 export const useGameManager = () => {
     const [scene, setScene] = useState<Scene>("menu");

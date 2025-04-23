@@ -10,6 +10,8 @@ import {
     PickupScreen,
 } from "@/scenes";
 
+export type Scene = "menu" | "cutscene" | "battle" | "pickup" | "gameover";
+
 export default function Game() {
     const { scene, transition } = useGameManager();
 
@@ -21,5 +23,5 @@ export default function Game() {
         gameover: <GameOver onTransition={transition} />,
     };
 
-    return <div className="w-full h-full">{sceneMap[scene]}</div>;
+    return sceneMap[scene];
 }
