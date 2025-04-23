@@ -54,29 +54,24 @@ export default function Background() {
             : [];
 
         let duration = 1;
-        let delay = 0.2;
 
         for (let image of images) {
             if (image.dataset.animate === "false") continue;
             gsap.to(image, {
                 top: image.dataset.top ? image.dataset.top : "50%",
                 duration: duration,
-                delay: delay,
-                ease: "power4.out",
+                ease: "power2.out",
+                onComplete: () => {
+                    const event = new CustomEvent("enableParallax");
+                    window.dispatchEvent(event);
+                },
             });
-            duration += 0.19;
-            delay += 0.1;
-
-            gsap.delayedCall(duration + delay, () => {
-                // enable parallax after animations complete
-                const event = new CustomEvent("enableParallax");
-                window.dispatchEvent(event);
-            });
+            duration += 0.3; // makes each image animate a bit later
         }
     }, [layers]);
 
     const parallaxStyle = "absolute left-1/2 -translate-x-1/2 -translate-y-1/2";
-    const layerOffset = "top-[160%]"; // epic reveal animation
+    const layerOffset = "top-[170%]"; // epic reveal animation
 
     return (
         <div
@@ -154,16 +149,18 @@ export default function Background() {
             <Image
                 className={`${parallaxStyle} ${layerOffset} min-w-[1952px]`}
                 data-speed="0.03"
+                data-top="40.5%"
                 src="/main-bg/trees.png"
                 alt="1"
                 width={1952}
-                height={1096}
+                height={1296}
                 unoptimized
             />
             {/* Sun lens*/}
             <Image
-                className={`${parallaxStyle} top-[55%] min-w-[105%] mix-blend-screen opacity-90`}
+                className={`${parallaxStyle} min-w-[105%] mix-blend-screen opacity-90`}
                 data-speed="0.015"
+                data-animate="false"
                 src="/main-bg/sun.png"
                 alt="sun"
                 width={1920}
