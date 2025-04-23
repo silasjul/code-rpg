@@ -63,7 +63,7 @@ export default function MainMenu() {
                     ref={logoRef}
                     className="flex justify-center items-center w-full select-none opacity-0"
                 >
-                    <Logo className="w-[40%]" />
+                    <Logo className="w-[40%] min-w-[500px]" />
                 </div>
                 <div
                     ref={buttonsContainerRef}
