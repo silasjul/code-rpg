@@ -1,4 +1,4 @@
-import { pixelFont } from "@/app/layout";
+import { pixelFont } from "@/app/page";
 
 interface MenuButtonProps {
     children: React.ReactNode;

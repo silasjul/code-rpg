@@ -1,13 +1,8 @@
 import "./globals.css";
-import { Jacquard_12, Pixelify_Sans } from "next/font/google";
+import { Pixelify_Sans } from "next/font/google";
 
 const pixelifySans = Pixelify_Sans({
     subsets: ["latin"],
-});
-
-export const pixelFont = Jacquard_12({
-    subsets: ["latin"],
-    weight: "400",
 });
 
 export default function RootLayout({

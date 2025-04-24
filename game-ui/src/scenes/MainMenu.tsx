@@ -3,7 +3,6 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { Logo, Background, MenuButton } from "@/components/menu";
 import { useGameManager } from "@/hooks/useGameManager";
-import { tr } from "motion/react-client";
 
 export default function MainMenu() {
     // GSAP animation
