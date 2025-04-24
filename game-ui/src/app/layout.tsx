@@ -1,21 +1,14 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Jacquard_12, Pixelify_Sans } from "next/font/google";
 
-const geistSans = Geist({
-    variable: "--font-geist-sans",
+const pixelifySans = Pixelify_Sans({
     subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-    variable: "--font-geist-mono",
+export const pixelFont = Jacquard_12({
     subsets: ["latin"],
+    weight: "400",
 });
-
-export const metadata: Metadata = {
-    title: "CodeRPG",
-    description: "Learn algortithms in a magical world",
-};
 
 export default function RootLayout({
     children,
@@ -24,9 +17,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body
-                className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-            >
+            <body className={`${pixelifySans.className} antialiased`}>
                 {children}
             </body>
         </html>

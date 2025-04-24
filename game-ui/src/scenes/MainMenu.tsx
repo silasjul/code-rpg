@@ -3,14 +3,14 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { Logo, Background, MenuButton } from "@/components/menu";
 import { useGameManager } from "@/hooks/useGameManager";
+import { tr } from "motion/react-client";
 
 export default function MainMenu() {
-    const [canClick, setCanClick] = React.useState(false);
-
     // GSAP animation
     const container = useRef(null);
     const logoRef = useRef(null);
     const buttonsContainerRef = useRef(null);
+    const [isAnimating, setAnimating] = React.useState(false);
 
     useGSAP(() => {
         gsap.timeline({
@@ -39,26 +39,26 @@ export default function MainMenu() {
                 {
                     y: 0,
                     opacity: 1,
-                    onComplete: () => setCanClick(true),
+                    onComplete: () => setAnimating(false),
                 },
                 0
             );
-    }, [container]);
+    }, [logoRef, buttonsContainerRef]);
 
     // Click handlers
-    const { setScene } = useGameManager();
+    const { setScene, transition } = useGameManager();
     const handleStartAdventure = () => {
-        if (!canClick) return;
-        setScene("loadingproblem");
+        if (isAnimating) return;
+        setAnimating(true);
+        transition(container.current, () => {
+            setScene("problemloader");
+        });
     };
 
     return (
-        <>
+        <div ref={container}>
             <Background />
-            <div
-                ref={container}
-                className="absolute w-screen h-screen overflow-hidden"
-            >
+            <div className="absolute w-screen h-screen overflow-hidden">
                 <div
                     ref={logoRef}
                     className="flex justify-center items-center w-full select-none opacity-0"
@@ -71,13 +71,13 @@ export default function MainMenu() {
                 >
                     <MenuButton
                         onClick={handleStartAdventure}
-                        canClick={canClick}
+                        canClick={!isAnimating}
                     >
                         Start Adventure
                     </MenuButton>
-                    <MenuButton canClick={canClick}>Character</MenuButton>
+                    <MenuButton canClick={!isAnimating}>Character</MenuButton>
                 </div>
             </div>
-        </>
+        </div>
     );
 }

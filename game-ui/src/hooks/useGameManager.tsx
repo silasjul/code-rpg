@@ -11,8 +11,9 @@ import {
     Cutscene,
     GameOver,
     PickupScreen,
-    LoadingProblem,
+    ProblemLoader,
 } from "@/scenes";
+import gsap from "gsap";
 
 const sceneMap = {
     menu: <MainMenu />,
@@ -20,7 +21,7 @@ const sceneMap = {
     battle: <BattleScreen />,
     pickup: <PickupScreen />,
     gameover: <GameOver />,
-    loadingproblem: <LoadingProblem />,
+    problemloader: <ProblemLoader />,
 };
 type Scene = keyof typeof sceneMap;
 
@@ -28,12 +29,15 @@ type GameContextType = {
     scene: Scene;
     setScene: Dispatch<SetStateAction<Scene>>;
     sceneMap: typeof sceneMap;
-    transition: (nextScene: Scene, delay?: number) => void;
     playerHP: number;
+    transition: (
+        continerRef: HTMLDivElement | null,
+        onFade: () => void
+    ) => void;
     setPlayerHP: Dispatch<SetStateAction<number>>;
     inventory: string[];
     setInventory: Dispatch<SetStateAction<string[]>>;
-}
+};
 
 const GameContext = createContext<GameContextType | null>(null);
 
@@ -44,20 +48,30 @@ export const GameManagerProvider = ({
 }) => {
     // Game state
     const [scene, setScene] = useState<Scene>("menu");
-    const [isTransitioning, setIsTransitioning] = useState(false);
 
     // Player state
     const [playerHP, setPlayerHP] = useState(100);
     const [inventory, setInventory] = useState<string[]>([]);
 
-    const transition = (nextScene: Scene, delay = 1000) => {
-        setIsTransitioning(true);
-        setScene("cutscene");
-
-        setTimeout(() => {
-            setScene(nextScene);
-            setIsTransitioning(false);
-        }, delay);
+    // Transition animation
+    const transition = (
+        continerRef: HTMLDivElement | null,
+        onFade: () => void
+    ) => {
+        gsap.timeline()
+            .to(continerRef, {
+                opacity: 0,
+                duration: 1,
+                ease: "power2.inOut",
+            })
+            .call(() => {
+                onFade();
+            })
+            .to(continerRef, {
+                opacity: 1,
+                duration: 1,
+                ease: "power2.inOut",
+            });
     };
 
     return (
@@ -67,6 +81,8 @@ export const GameManagerProvider = ({
                 scene,
                 sceneMap,
                 setScene,
+
+                // Transition
                 transition,
 
                 // Player
@@ -84,7 +100,9 @@ export const GameManagerProvider = ({
 export const useGameManager = () => {
     const gameContext = useContext(GameContext);
     if (!gameContext) {
-        throw new Error("This hook can only be used within a scene components.");
+        throw new Error(
+            "This hook can only be used within a scene components."
+        );
     }
     return gameContext;
-}
+};
