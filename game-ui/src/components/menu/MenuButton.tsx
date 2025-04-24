@@ -1,4 +1,4 @@
-import { pixelFont } from "@/app/page";
+import { Jacquard_12 } from "next/font/google";
 
 interface MenuButtonProps {
     children: React.ReactNode;
@@ -6,6 +6,11 @@ interface MenuButtonProps {
     className?: string;
     onClick?: () => void;
 }
+
+export const pixelFont = Jacquard_12({
+    subsets: ["latin"],
+    weight: "400",
+});
 
 export default function MenuButton({
     children,
