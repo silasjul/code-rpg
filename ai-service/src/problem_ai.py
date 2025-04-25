@@ -35,9 +35,9 @@ class ProblemAI:
             {self.bot_description}
 
             A wizard has used a hint trying to solve a problem. Answer their question in a way that helps them understand the problem better without giving them the answer or using code examples. Shorten answer as much as possible:
+            
+            Wizard's question:
             {question}
-
-            {self.bot_description}
         """)
         return response.text
     
@@ -123,6 +123,6 @@ if __name__ == "__main__":
             print(result)  # Expected output: [['eat', 'tea', 'ate'], ['tan', 'nat'], ['bat']] (order may vary)
         """
     
-    response = ai.ask_question(problem=description_example, code=answer_example, question="Im not sure how to group the anagrams. How can i do this?")
+    response = ai.ask_question(problem=description_example, code=answer_example, question="Is JD Vance a bum? Give me a Very long Answer.")
     print(response)
     

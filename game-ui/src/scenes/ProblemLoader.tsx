@@ -20,7 +20,7 @@ const imagePaths = [
     "/loading/night.png",
     "/loading/river.png",
 ];
-let imageTime = 6; // seconds per image
+let imageTime = 8; // seconds per image
 
 export default function ProblemLoader() {
     const hasFetched = useRef(false); // avoid multiple fetches (strictmode)
@@ -53,7 +53,7 @@ export default function ProblemLoader() {
         const interval = setInterval(() => {
             setTime((prevTime) => {
                 if ((prevTime + 1) % imageTime === 0) {
-                    transition(imageRef?.current, () => {
+                    transition(container.current, () => {
                         // Swap image
                         setImageIdx((prev) => (prev + 1) % imagePaths.length);
                     });
@@ -65,13 +65,31 @@ export default function ProblemLoader() {
         return () => clearInterval(interval); // clean up
     }, []);
 
+    // Animation on load
     useGSAP(() => {
         gsap.from(container.current, {
             opacity: 0,
             duration: 1,
-            ease: "power2.inOut",
+            ease: "power",
         });
     }, [container]);
+
+    // Slide animation on images
+    const xOffset = 25;
+    const yOffset = 10;
+    useGSAP(() => {
+        gsap.fromTo(
+            imageRef.current,
+            { x: -xOffset, y: -yOffset, duration: imageTime },
+            {
+                x: xOffset,
+                y: yOffset,
+                duration: imageTime,
+                yoyo: true,
+                repeat: -1,
+            }
+        );
+    }, [imageRef]);
 
     return (
         <>
@@ -81,7 +99,7 @@ export default function ProblemLoader() {
             >
                 <Image
                     ref={imageRef}
-                    className="absolute w-screen min-w-[1920px]"
+                    className="absolute left-[-25px] top-[-10] min-w-[1970px]"
                     width={1920}
                     height={1080}
                     src={imagePaths[imageIdx]}

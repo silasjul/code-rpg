@@ -15,6 +15,7 @@ import {
 } from "@/scenes";
 import gsap from "gsap";
 
+/* SCENES */
 const sceneMap = {
     menu: <MainMenu />,
     cutscene: <Cutscene />,
@@ -25,6 +26,7 @@ const sceneMap = {
 };
 type Scene = keyof typeof sceneMap;
 
+/* GAME CONTEXT */
 type GameContextType = {
     scene: Scene;
     setScene: Dispatch<SetStateAction<Scene>>;
@@ -53,7 +55,7 @@ export const GameManagerProvider = ({
     const [playerHP, setPlayerHP] = useState(100);
     const [inventory, setInventory] = useState<string[]>([]);
 
-    // Transition animation
+    // Fading animation
     const transition = (
         continerRef: HTMLDivElement | null,
         onFade: () => void
@@ -61,7 +63,7 @@ export const GameManagerProvider = ({
         gsap.timeline()
             .to(continerRef, {
                 opacity: 0,
-                duration: 1,
+                duration: 1.5,
                 ease: "power2.inOut",
             })
             .call(() => {
@@ -69,7 +71,7 @@ export const GameManagerProvider = ({
             })
             .to(continerRef, {
                 opacity: 1,
-                duration: 1,
+                duration: 1.5,
                 ease: "power2.inOut",
             });
     };
@@ -97,6 +99,7 @@ export const GameManagerProvider = ({
     );
 };
 
+/* HOOK */
 export const useGameManager = () => {
     const gameContext = useContext(GameContext);
     if (!gameContext) {
